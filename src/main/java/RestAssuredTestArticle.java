@@ -1,5 +1,6 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.internal.http.ContentEncoding;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -36,7 +37,7 @@ public class RestAssuredTestArticle {
         RestAssured.defaultParser = Parser.JSON;
         Response response = given()
                 .log().all()
-                .headers("Content-Type", ContentType.JSON, "Assept", ContentType.JSON)
+                .headers("Content-Type", ContentType.JSON)
                 .when()
                 .get(URL)
                 .then()
