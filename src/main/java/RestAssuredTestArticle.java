@@ -50,6 +50,13 @@ public class RestAssuredTestArticle {
                 .get(URL)
                 .then()
                 .contentType(ContentType.JSON).extract().response();
+
+        String checkingName = getMaxEntry(response);
+        //сравниваем того, кто в конце с интересующим значением
+        Assert.assertEquals(checkingName.equals("{first=" + firstName + ", last=" + lastName + "}"), true);
+    }
+
+    private String getMaxEntry(Response response) {
         //получаем список всех имен
         List<Map<String, String>> names = response.jsonPath().getList("all.user.name");
         Map<String,Integer> counters = new HashMap<>();
@@ -71,12 +78,7 @@ public class RestAssuredTestArticle {
             }
         });
         //тот, кто больше всего фактов написал окажется в конце
-        System.out.println(valueList.get(valueList.size() - 1).getKey());
-        //сравниваем того, кто в конце с интересующим значением
-        Assert.assertEquals(valueList.get(valueList.size() - 1).getKey().equals("{first=" + firstName + ", last=" + lastName + "}"), true);
-
-
+        return valueList.get(valueList.size() - 1).getKey();
     }
-
 
 }
