@@ -1,6 +1,5 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.internal.http.ContentEncoding;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -8,10 +7,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
-
 
 
 public class RestAssuredTestArticle {
@@ -69,16 +70,15 @@ public class RestAssuredTestArticle {
                 counters.put(temp, counters.get(temp) + 1);
             }
         }
-        //сортируем уникальные значения по ключу
-        List<Map.Entry<String,Integer>> valueList = new ArrayList<>(counters.entrySet());
-        Collections.sort(valueList, new Comparator<Map.Entry<String,Integer>>() {
-            @Override
-            public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+
+        //сортируем уникальные значения и записываем результат в новый список
+        List<Map.Entry<String,Integer>> valueList = counters.entrySet().stream()
+                .sorted(Map.Entry.<String,Integer> comparingByValue())
+                .collect(Collectors.toList());
+
         //тот, кто больше всего фактов написал окажется в конце
         return valueList.get(valueList.size() - 1).getKey();
+
     }
 
 }
