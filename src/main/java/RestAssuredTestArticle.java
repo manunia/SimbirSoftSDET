@@ -3,7 +3,6 @@ import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -24,23 +23,6 @@ public class RestAssuredTestArticle {
         return new Object[][] {{"Kasimir", "Schulz"}};
     }
 
-    @BeforeTest
-    @Test(description = "Check status code 200")
-    public void getRequestTest() {
-        Response response =
-                given()
-                .log().all()
-                .when()
-                .get(URL)
-                .then()
-                .log().all()
-                .statusCode(200)
-                .extract()
-                .response();
-        response.getBody().print();
-
-    }
-
     @Test(description = "Checking the number of repetitions", dataProvider = "testUsers")
     public void getJsonPathTest(String firstName, String lastName) {
         RestAssured.defaultParser = Parser.JSON;
@@ -50,6 +32,8 @@ public class RestAssuredTestArticle {
                 .when()
                 .get(URL)
                 .then()
+                .log().status()
+                .statusCode(200)
                 .contentType(ContentType.JSON).extract().response();
 
         String checkingName = getMaxEntry(response);
