@@ -4,6 +4,8 @@ import io.restassured.internal.http.ContentEncoding;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -16,6 +18,12 @@ public class RestAssuredTestArticle {
 
     private static final String URL = "https://cat-fact.herokuapp.com/facts";
 
+    @DataProvider(name = "testUsers")
+    public static Object[][] checkingNames() {
+        return new Object[][] {{"Kasimir", "Schulz"}, {"Alex","Wohlbruck"}};
+    }
+
+    @BeforeTest
     @Test(description = "Check status code 200")
     public void getRequestTest() {
         Response response =
@@ -32,8 +40,8 @@ public class RestAssuredTestArticle {
 
     }
 
-    @Test(description = "Checking the number of repetitions")
-    public void getJsonPathTest() {
+    @Test(description = "Checking the number of repetitions", dataProvider = "testUsers")
+    public void getJsonPathTest(String firstName, String lastName) {
         RestAssured.defaultParser = Parser.JSON;
         Response response = given()
                 .log().all()
@@ -65,7 +73,7 @@ public class RestAssuredTestArticle {
         //тот, кто больше всего фактов написал окажется в конце
         System.out.println(valueList.get(valueList.size() - 1).getKey());
         //сравниваем того, кто в конце с интересующим значением
-        Assert.assertEquals(valueList.get(valueList.size() - 1).getKey().equals("{first=Kasimir, last=Schulz}"), true);
+        Assert.assertEquals(valueList.get(valueList.size() - 1).getKey().equals("{first=" + firstName + ", last=" + lastName + "}"), true);
 
 
     }
