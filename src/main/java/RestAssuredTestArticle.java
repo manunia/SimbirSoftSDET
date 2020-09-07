@@ -21,7 +21,7 @@ public class RestAssuredTestArticle {
 
     @DataProvider(name = "testUsers")
     public static Object[][] checkingNames() {
-        return new Object[][] {{"Kasimir", "Schulz"}, {"Alex","Wohlbruck"}};
+        return new Object[][] {{"Kasimir", "Schulz"}};
     }
 
     @BeforeTest
