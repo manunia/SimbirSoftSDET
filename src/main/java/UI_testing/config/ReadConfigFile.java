@@ -21,9 +21,7 @@ public class ReadConfigFile {
             } else {
                 throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
             }
-
             propertyValue= properties.getProperty(propertyName);
-            System.out.println(propertyValue);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

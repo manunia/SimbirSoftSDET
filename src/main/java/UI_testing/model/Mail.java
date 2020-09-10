@@ -8,9 +8,9 @@ public class Mail {
 
     @Step("Enter count of letters {0}")
     @Description("Set count of letters")
-    public void setCountLetters(String countOfLetters) {
+    public void setCountLetters(int countOfLetters) {
         try {
-            countLetters = Integer.parseInt(countOfLetters);
+            countLetters = countOfLetters;
         } catch (Exception e) {
             System.out.println("Error parsing count of letters " + e.getMessage());
         }

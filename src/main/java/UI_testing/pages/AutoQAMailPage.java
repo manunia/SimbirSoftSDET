@@ -3,14 +3,16 @@ package UI_testing.pages;
 import UI_testing.config.SeleniumHandler;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AutoQAMailPage {
 
-    private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr/td/div[@class = 'afn']";
-    private static final String LETTERS = ".//*[@class='bsU']";//т.к. мы находим дочерний элемент из блока входящих, то можно искать по классу
+    private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA zE']";//"//table[@class = 'F cf zt']/tbody/tr/td/div[@class = 'afn']";
+    private static final String LETTERS = ".//td/div[@class = 'afn']";
 
     private static final String NEW_LETTER = "//*[@class='aic']/div/div";
 
@@ -35,11 +37,32 @@ public class AutoQAMailPage {
     private Mail getElementIncomingLetters(String mail) {
         Mail mailObj = new Mail();
         List<WebElement> elements = handler.getElems(mail);
-        for (WebElement e:elements) {
-            //System.out.println(handler.getChildElemText(,INCOMING_LETTERS));
+        List<String> sendersAndThemeList = new ArrayList<>();
+        for (int i = 0; i < elements.size(); i++) {
+            String[] temp = elements.get(i).getText().split("\n");
+            sendersAndThemeList.add(temp[0] + temp[1]);
         }
-        //mailObj.setCountLetters();
+
+        int x = getLettersFromMySelf(sendersAndThemeList);
+        System.out.println("++++++++++++++" + x);
+
+        mailObj.setCountLetters(x);
         return mailObj;
+    }
+
+    public int getLettersFromMySelf(List<String> list) {
+        Map<String,Integer> counters = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            String temp = String.valueOf(list.get(i));
+            if (!counters.containsKey(temp)) {
+                counters.put(temp,1);
+            } else {
+                counters.put(temp, counters.get(temp) + 1);
+            }
+        }
+
+        return counters.get("яSimbirsoft theme");
+
     }
 
     @Step("Letter sending")
@@ -73,6 +96,6 @@ public class AutoQAMailPage {
         setAddres(adress);
         setTheme(theme);
         setLetterBody(letterBody);
-        sendLetter();
+//        sendLetter();
     }
 }
