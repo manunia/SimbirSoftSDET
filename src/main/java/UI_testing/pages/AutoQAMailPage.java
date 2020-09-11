@@ -29,40 +29,10 @@ public class AutoQAMailPage {
 
     @Step("Count incoming letters from my self")
     public String getResultFromIncomingLetters() {
-        Mail result = getElementIncomingLetters(INCOMING_LETTERS);
+        Mail result = new Mail();
+        result.getElementIncomingLetters(INCOMING_LETTERS,handler);
         System.out.println(result.toString());
         return result.toString();
-    }
-
-    private Mail getElementIncomingLetters(String mail) {
-        Mail mailObj = new Mail();
-        List<WebElement> elements = handler.getElems(mail);
-        List<String> sendersAndThemeList = new ArrayList<>();
-        for (int i = 0; i < elements.size(); i++) {
-            String[] temp = elements.get(i).getText().split("\n");
-            sendersAndThemeList.add(temp[0] + temp[1]);
-        }
-
-        int x = getLettersFromMySelf(sendersAndThemeList);
-        System.out.println("++++++++++++++" + x);
-
-        mailObj.setCountLetters(x);
-        return mailObj;
-    }
-
-    public int getLettersFromMySelf(List<String> list) {
-        Map<String,Integer> counters = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            String temp = String.valueOf(list.get(i));
-            if (!counters.containsKey(temp)) {
-                counters.put(temp,1);
-            } else {
-                counters.put(temp, counters.get(temp) + 1);
-            }
-        }
-
-        return counters.get("яSimbirsoft theme");
-
     }
 
     @Step("Letter sending")
@@ -96,6 +66,6 @@ public class AutoQAMailPage {
         setAddres(adress);
         setTheme(theme);
         setLetterBody(letterBody);
-//        sendLetter();
+        sendLetter();
     }
 }
