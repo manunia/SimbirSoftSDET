@@ -21,7 +21,7 @@ public class TestConfig {
             } else {
                 throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
             }
-            propertyValue= properties.getProperty(propertyName);
+            propertyValue = properties.getProperty(propertyName);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
