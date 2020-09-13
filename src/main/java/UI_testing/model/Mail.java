@@ -1,15 +1,12 @@
 package UI_testing.model;
 
-import UI_testing.config.SeleniumHandler;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebElement;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+@Getter
+@Setter
 public class Mail {
     private int countLetters;
 
@@ -19,39 +16,11 @@ public class Mail {
         this.countLetters = countOfLetters;
     }
 
-    public void getElementIncomingLetters(List<WebElement> elements) {
-        List<String> sendersAndThemeList = new ArrayList<>();
-        for (int i = 0; i < elements.size(); i++) {
-            String[] temp = elements.get(i).getText().split("\n");
-            sendersAndThemeList.add(temp[0] + temp[1]);
-        }
-
-        int x = getLettersFromMySelf(sendersAndThemeList);
-        System.out.println("++++++++++++++" + x);
-
-        this.setCountLetters(x);
-    }
-
-    public int getLettersFromMySelf(List<String> list) {
-        Map<String,Integer> counters = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            String temp = String.valueOf(list.get(i));
-            if (!counters.containsKey(temp)) {
-                counters.put(temp,1);
-            } else {
-                counters.put(temp, counters.get(temp) + 1);
-            }
-        }
-
-        return counters.get("яSimbirsoft theme");
-
-    }
-
     @Override
     public String toString() {
         int x = countLetters;
         StringBuilder sb = new StringBuilder();
-        while (x > 0) {
+        while (x > 10) {
             x = x % 10;
         }
         sb.append("Найдено ");

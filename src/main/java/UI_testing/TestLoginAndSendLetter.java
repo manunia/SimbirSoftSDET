@@ -50,7 +50,7 @@ public class TestLoginAndSendLetter {
     @Description("Close browser")
     @AfterTest
     private void stop() {
-        //handler.stop();
+        handler.stop();
     }
 
 }

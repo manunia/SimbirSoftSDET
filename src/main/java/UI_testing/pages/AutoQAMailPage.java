@@ -1,11 +1,11 @@
 package UI_testing.pages;
 
 import UI_testing.config.SeleniumHandler;
+import UI_testing.data.DataUseCaseClass;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AutoQAMailPage {
@@ -21,18 +21,20 @@ public class AutoQAMailPage {
     private static final String SEND_BUTTON = "//*[@class='dC']/div";
 
     private SeleniumHandler handler;
+    private Mail resultEmail;
+    private DataUseCaseClass data;
 
     public AutoQAMailPage(SeleniumHandler handler) {
         this.handler = handler;
+        this.data = new DataUseCaseClass();
     }
 
     @Step("Count incoming letters from my self")
-    public String getResultFromIncomingLetters() {
+    public void getResultFromIncomingLetters() {
         List<WebElement> elements = handler.getElements(INCOMING_LETTERS);
-        Mail result = new Mail();
-        result.getElementIncomingLetters(elements);
-        System.out.println(result.toString());
-        return result.toString();
+        resultEmail = new Mail();
+        resultEmail.setCountLetters(data.getElementIncomingLetters(elements));
+        System.out.println(resultEmail.toString());
     }
 
     @Step("Letter sending")
@@ -61,11 +63,13 @@ public class AutoQAMailPage {
     }
 
     public void createALetter(String adress, String theme) {
-        String letterBody = getResultFromIncomingLetters();
+        getResultFromIncomingLetters();
+        String letterBody = resultEmail.toString();
         createNewLetter();
         setAddres(adress);
         setTheme(theme);
         setLetterBody(letterBody);
         sendLetter();
     }
+
 }
