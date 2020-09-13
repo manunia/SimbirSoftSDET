@@ -20,7 +20,7 @@ public class Mail {
     }
 
     public void getElementIncomingLetters(String mail, SeleniumHandler handler) {
-        List<WebElement> elements = handler.getElems(mail);
+        List<WebElement> elements = handler.getElements(mail);
         List<String> sendersAndThemeList = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             String[] temp = elements.get(i).getText().split("\n");

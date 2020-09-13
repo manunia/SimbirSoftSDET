@@ -3,11 +3,6 @@ package UI_testing.pages;
 import UI_testing.config.SeleniumHandler;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class AutoQAMailPage {
 
@@ -37,7 +32,7 @@ public class AutoQAMailPage {
 
     @Step("Letter sending")
     private void sendLetter() {
-        handler.click(handler.getElem(SEND_BUTTON));
+        handler.click(handler.getElemtnt(SEND_BUTTON));
     }
 
     @Step("Print letter body {0}")
@@ -57,7 +52,7 @@ public class AutoQAMailPage {
 
     @Step("Press New letter button")
     private void createNewLetter() {
-        handler.click(handler.getElem(NEW_LETTER));
+        handler.click(handler.getElemtnt(NEW_LETTER));
     }
 
     public void createALetter(String adress, String theme) {
