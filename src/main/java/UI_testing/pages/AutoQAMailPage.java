@@ -3,6 +3,10 @@ package UI_testing.pages;
 import UI_testing.config.SeleniumHandler;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AutoQAMailPage {
 
@@ -24,8 +28,9 @@ public class AutoQAMailPage {
 
     @Step("Count incoming letters from my self")
     public String getResultFromIncomingLetters() {
+        List<WebElement> elements = handler.getElements(INCOMING_LETTERS);
         Mail result = new Mail();
-        result.getElementIncomingLetters(INCOMING_LETTERS,handler);
+        result.getElementIncomingLetters(elements);
         System.out.println(result.toString());
         return result.toString();
     }

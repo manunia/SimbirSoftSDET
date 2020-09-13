@@ -19,8 +19,7 @@ public class Mail {
         this.countLetters = countOfLetters;
     }
 
-    public void getElementIncomingLetters(String mail, SeleniumHandler handler) {
-        List<WebElement> elements = handler.getElements(mail);
+    public void getElementIncomingLetters(List<WebElement> elements) {
         List<String> sendersAndThemeList = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             String[] temp = elements.get(i).getText().split("\n");

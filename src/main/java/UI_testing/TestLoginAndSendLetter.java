@@ -33,13 +33,6 @@ public class TestLoginAndSendLetter {
         }
     }
 
-    @Description("create letter")
-    @Story("Create and send letter")
-    @Test
-    private void sendLetter() {
-        qaMailPage.createALetter(configFile.getPropertyValue("test_gmail"),THEME);
-    }
-
     @Description("Login")
     @Story("Enter login and password")
     @Test
@@ -47,10 +40,17 @@ public class TestLoginAndSendLetter {
         qaLogin.loginToAutoQA(configFile.getPropertyValue("test_gmail"),configFile.getPropertyValue("test_password"));
     }
 
+    @Description("create letter")
+    @Story("Create and send letter")
+    @Test
+    private void sendLetter() {
+        qaMailPage.createALetter(configFile.getPropertyValue("test_gmail"),THEME);
+    }
+
     @Description("Close browser")
     @AfterTest
     private void stop() {
-        handler.stop();
+        //handler.stop();
     }
 
 }
