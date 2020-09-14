@@ -20,6 +20,8 @@ public class AutoQAMailPage extends AbstractPage{
     private static final String LETTER_BODY = "//*[@class='Ar Au']/div[@aria-label='Тело письма']";
     private static final String SEND_BUTTON = "//*[@class='dC']/div";
 
+    private static final String AFTER_SEND = "//*[@id='link_vsm']";
+
     public AutoQAMailPage(SeleniumHandler handler) {
         super(handler);
     }
@@ -57,6 +59,11 @@ public class AutoQAMailPage extends AbstractPage{
         handler.click(handler.getElement(NEW_LETTER));
     }
 
+    @Step("Check send letter")
+    private void checkLetter() {
+        handler.click(handler.getElement(AFTER_SEND));
+    }
+
     public void createLetter(String address, String theme) {
         String letterBody = getResultFromIncomingLetters();
         createNewLetter();
@@ -64,6 +71,7 @@ public class AutoQAMailPage extends AbstractPage{
         setTheme(theme);
         setLetterBody(letterBody);
         sendLetter();
+        checkLetter();
     }
 
 }

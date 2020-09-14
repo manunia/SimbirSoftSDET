@@ -31,6 +31,7 @@ public class Mail {
         } else {
             sb.append(countLetters + " писем");
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 }
