@@ -29,7 +29,8 @@ public class AutoQAMailPage {
 
     @Step("Count incoming letters from my self")
     public String getResultFromIncomingLetters() {
-        Mail result = getElementIncomingLetters(INCOMING_LETTERS);
+        //Mail result = getElementIncomingLetters(INCOMING_LETTERS);
+
         System.out.println(result.toString());
         return result.toString();
     }
@@ -44,9 +45,7 @@ public class AutoQAMailPage {
         }
 
         int x = getLettersFromMySelf(sendersAndThemeList);
-        System.out.println("++++++++++++++" + x);
-
-        mailObj.setCountLetters(x);
+        mailObj.countLetters = x;
         return mailObj;
     }
 
@@ -96,6 +95,6 @@ public class AutoQAMailPage {
         setAddres(adress);
         setTheme(theme);
         setLetterBody(letterBody);
-//        sendLetter();
+        sendLetter();
     }
 }
