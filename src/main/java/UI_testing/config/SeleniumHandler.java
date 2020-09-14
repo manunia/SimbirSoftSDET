@@ -51,7 +51,7 @@ public class SeleniumHandler {
                 ChromeConfig.getDesiredCapabilities(handlessMode));
     }
 
-    public WebElement getElemtnt(String xpath) {
+    public WebElement getElement(String xpath) {
         return driver.findElement(By.xpath(xpath));
     }
 
@@ -77,7 +77,7 @@ public class SeleniumHandler {
     }
 
     public void setTextToElement(String xpath, String text) {
-        getElemtnt(xpath).sendKeys(text);
+        getElement(xpath).sendKeys(text);
     }
 
     public void stop() {

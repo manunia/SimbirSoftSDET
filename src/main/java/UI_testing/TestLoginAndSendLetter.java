@@ -44,7 +44,7 @@ public class TestLoginAndSendLetter {
     @Story("Create and send letter")
     @Test
     private void sendLetter() {
-        qaMailPage.createALetter(configFile.getPropertyValue("test_gmail"),THEME);
+        qaMailPage.createLetter(configFile.getPropertyValue("test_gmail"),THEME);
     }
 
     @Description("Close browser")

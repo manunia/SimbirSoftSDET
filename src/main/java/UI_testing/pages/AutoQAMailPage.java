@@ -39,7 +39,7 @@ public class AutoQAMailPage {
 
     @Step("Letter sending")
     private void sendLetter() {
-        handler.click(handler.getElemtnt(SEND_BUTTON));
+        handler.click(handler.getElement(SEND_BUTTON));
     }
 
     @Step("Print letter body {0}")
@@ -52,21 +52,21 @@ public class AutoQAMailPage {
         handler.setTextToElement(THEME_FIELD, theme);
     }
 
-    @Step("Enter addres {0}")
-    private void setAddres(String addres) {
-        handler.setTextToElement(ADRESS_FIELD, addres);
+    @Step("Enter address {0}")
+    private void setAddress(String address) {
+        handler.setTextToElement(ADRESS_FIELD, address);
     }
 
     @Step("Press New letter button")
     private void createNewLetter() {
-        handler.click(handler.getElemtnt(NEW_LETTER));
+        handler.click(handler.getElement(NEW_LETTER));
     }
 
-    public void createALetter(String adress, String theme) {
+    public void createLetter(String address, String theme) {
         getResultFromIncomingLetters();
         String letterBody = resultEmail.toString();
         createNewLetter();
-        setAddres(adress);
+        setAddress(address);
         setTheme(theme);
         setLetterBody(letterBody);
         sendLetter();
