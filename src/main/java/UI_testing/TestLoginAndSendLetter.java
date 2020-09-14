@@ -30,12 +30,12 @@ public class TestLoginAndSendLetter {
             handler.openPage(BASE_URL);
             System.out.println("open page: " + BASE_URL);
             qaMailPage = new AutoQAMailPage(handler);
+            login();
         }
     }
 
     @Description("Login")
     @Story("Enter login and password")
-    @Test
     private void login() {
         qaLogin.loginToAutoQA(configFile.getPropertyValue("test_gmail"),configFile.getPropertyValue("test_password"));
     }
