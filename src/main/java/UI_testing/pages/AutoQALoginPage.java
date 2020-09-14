@@ -4,14 +4,12 @@ import UI_testing.config.SeleniumHandler;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 
-public class AutoQALoginPage {
+public class AutoQALoginPage extends AbstractPage{
     private static final String LOGIN_FIELD = "//*[@id='identifierId']";
     private static final String PASSWORD_FIELD = "//*[@id='password']/div[1]/div/div[1]/input";
 
-    private SeleniumHandler handler;
-
     public AutoQALoginPage(SeleniumHandler handler) {
-        this.handler = handler;
+        super(handler);
     }
 
     @Step("Enter login {0}")

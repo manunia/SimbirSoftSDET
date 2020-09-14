@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class AutoQAMailPage {
+public class AutoQAMailPage extends AbstractPage{
 
     private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA zE']";//"//table[@class = 'F cf zt']/tbody/tr/td/div[@class = 'afn']";
     private static final String LETTERS = ".//td/div[@class = 'afn']";
@@ -20,21 +20,16 @@ public class AutoQAMailPage {
     private static final String LETTER_BODY = "//*[@class='Ar Au']/div[@aria-label='Тело письма']";
     private static final String SEND_BUTTON = "//*[@class='dC']/div";
 
-    private SeleniumHandler handler;
-    private Mail resultEmail;
-    private DataUseCaseClass data;
-
     public AutoQAMailPage(SeleniumHandler handler) {
-        this.handler = handler;
-        this.data = new DataUseCaseClass();
+        super(handler);
     }
 
     @Step("Count incoming letters from my self")
-    public void getResultFromIncomingLetters() {
+    public String getResultFromIncomingLetters() {
         List<WebElement> elements = handler.getElements(INCOMING_LETTERS);
-        resultEmail = new Mail();
-        resultEmail.setCountLetters(data.getElementIncomingLetters(elements));
-        System.out.println(resultEmail.toString());
+        Mail resultEmail = new Mail();
+        resultEmail.setCountLetters(DataUseCaseClass.getElementIncomingLetters(elements));
+        return resultEmail.toString();
     }
 
     @Step("Letter sending")
@@ -63,8 +58,7 @@ public class AutoQAMailPage {
     }
 
     public void createLetter(String address, String theme) {
-        getResultFromIncomingLetters();
-        String letterBody = resultEmail.toString();
+        String letterBody = getResultFromIncomingLetters();
         createNewLetter();
         setAddress(address);
         setTheme(theme);

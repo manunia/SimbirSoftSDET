@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class DataUseCaseClass {
 
-    public int getElementIncomingLetters(List<WebElement> elements) {
+    public static int getElementIncomingLetters(List<WebElement> elements) {
         List<String> sendersAndThemeList = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             String[] temp = elements.get(i).getText().split("\n");
@@ -19,7 +19,7 @@ public class DataUseCaseClass {
         return x;
     }
 
-    public int getLettersFromMySelf(List<String> list) {
+    public static int getLettersFromMySelf(List<String> list) {
         Map<String,Integer> counters = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             String temp = String.valueOf(list.get(i));
