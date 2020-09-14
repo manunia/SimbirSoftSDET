@@ -51,21 +51,21 @@ public class SeleniumHandler {
                 ChromeConfig.getDesiredCapabilities(handlessMode));
     }
 
-    public WebElement getElem(String xpath) {
+    public WebElement getElemtnt(String xpath) {
         return driver.findElement(By.xpath(xpath));
     }
 
-    public List<WebElement> getElems(String xpath) {
+    public List<WebElement> getElements(String xpath) {
         return driver.findElements(By.xpath(xpath));
     }
 
-    public WebElement getChildElem(String xpath, String parentElement) {
+    public WebElement getChildElement(String xpath, String parentElement) {
         return driver.findElement(By.xpath(parentElement)).findElement(By.xpath(xpath));
     }
 
-    public String getChildElemText(String xpath, String parentElement) {
+    public String getChildElementText(String xpath, String parentElement) {
         try {
-            return getChildElem(xpath,parentElement).getText();
+            return getChildElement(xpath,parentElement).getText();
         } catch (Exception e) {
             System.out.println("Child element not located : " + e.getMessage());
             return "";
@@ -77,7 +77,7 @@ public class SeleniumHandler {
     }
 
     public void setTextToElement(String xpath, String text) {
-        getElem(xpath).sendKeys(text);
+        getElemtnt(xpath).sendKeys(text);
     }
 
     public void stop() {

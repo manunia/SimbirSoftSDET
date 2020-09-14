@@ -2,9 +2,13 @@ package UI_testing.model;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Mail {
-    public int countLetters;
+    private int countLetters;
 
     @Step("Enter count of letters {0}")
     @Description("Set count of letters")
@@ -15,18 +19,18 @@ public class Mail {
     @Override
     public String toString() {
         int x = countLetters;
-        String str = "";
-        while (x > 0) {
+        StringBuilder sb = new StringBuilder();
+        while (x > 10) {
             x = x % 10;
         }
-        str+="Найдено ";
+        sb.append("Найдено ");
         if (x == 1) {
-            str+=countLetters + " письмо";
+            sb.append(countLetters + " письмо");
         } else if (x > 1 && x <= 4) {
-            str+=countLetters + " письма";
+            sb.append(countLetters + " письма");
         } else {
-            str+=countLetters + " писем";
+            sb.append(countLetters + " писем");
         }
-        return str;
+        return sb.toString();
     }
 }
