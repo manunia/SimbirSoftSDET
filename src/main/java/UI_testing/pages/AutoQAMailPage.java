@@ -1,6 +1,7 @@
 package UI_testing.pages;
 
 import UI_testing.config.SeleniumHandler;
+import UI_testing.config.Waiters;
 import UI_testing.data.DataUseCaseClass;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
@@ -13,8 +14,7 @@ import java.util.List;
 
 public class AutoQAMailPage extends AbstractPage{
 
-    private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA zE']";//"//table[@class = 'F cf zt']/tbody/tr/td/div[@class = 'afn']";
-    private static final String LETTERS = ".//td/div[@class = 'afn']";
+    private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA zE']";
 
     private static final String NEW_LETTER = "//*[@class='aic']/div/div";
 
@@ -69,8 +69,7 @@ public class AutoQAMailPage extends AbstractPage{
         setTheme(theme);
         setLetterBody(letterBody);
         sendLetter();
-        WebElement dinamicElement = (new WebDriverWait(handler.getDriver(),10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(AFTER_SEND)));
+        WebElement dinamicElement = Waiters.waitElement(handler,10,AFTER_SEND);
     }
 
 }

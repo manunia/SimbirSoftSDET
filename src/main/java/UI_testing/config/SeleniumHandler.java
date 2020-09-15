@@ -43,10 +43,10 @@ public class SeleniumHandler {
         return new ChromeDriver(ChromeConfig.getChromeOptions(headlessMode));
     }
 
-    private WebDriver getRemoteDriver(boolean handlessMode) throws MalformedURLException {
+    private WebDriver getRemoteDriver(boolean headlessMode) throws MalformedURLException {
         return new RemoteWebDriver(
                 new URL(SELENIUM_SERVER_URL),
-                ChromeConfig.getDesiredCapabilities(handlessMode));
+                ChromeConfig.getDesiredCapabilities(headlessMode));
     }
 
     public WebElement getElement(String xpath) {
