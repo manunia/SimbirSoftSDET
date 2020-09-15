@@ -84,4 +84,7 @@ public class SeleniumHandler {
         }
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
 }

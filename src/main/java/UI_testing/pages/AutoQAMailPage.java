@@ -4,7 +4,10 @@ import UI_testing.config.SeleniumHandler;
 import UI_testing.data.DataUseCaseClass;
 import UI_testing.model.Mail;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -59,11 +62,6 @@ public class AutoQAMailPage extends AbstractPage{
         handler.click(handler.getElement(NEW_LETTER));
     }
 
-    @Step("Check send letter")
-    private void checkLetter() {
-        handler.click(handler.getElement(AFTER_SEND));
-    }
-
     public void createLetter(String address, String theme) {
         String letterBody = getResultFromIncomingLetters();
         createNewLetter();
@@ -71,7 +69,8 @@ public class AutoQAMailPage extends AbstractPage{
         setTheme(theme);
         setLetterBody(letterBody);
         sendLetter();
-        checkLetter();
+        WebElement dinamicElement = (new WebDriverWait(handler.getDriver(),10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(AFTER_SEND)));
     }
 
 }
