@@ -17,21 +17,20 @@ public class TestLoginAndSendLetter {
     private static final String BASE_URL = "https://www.gmail.com/";
     private static final String THEME = "Simbirsoft theme";
 
-    private SeleniumHandler handler = new SeleniumHandler();
+    private SeleniumHandler handler;
     private AutoQALoginPage qaLogin;
     private AutoQAMailPage qaMailPage;
 
     @Description("open browser")
     @BeforeTest
     private void initialization() {
+        handler = new SeleniumHandler(false,false);
         configFile = new TestConfig();
-        if (handler.start(false,false)) {
-            qaLogin = new AutoQALoginPage(handler);
-            handler.openPage(BASE_URL);
-            System.out.println("open page: " + BASE_URL);
-            qaMailPage = new AutoQAMailPage(handler);
-            login();
-        }
+        qaLogin = new AutoQALoginPage(handler);
+        handler.openPage(BASE_URL);
+        System.out.println("open page: " + BASE_URL);
+        qaMailPage = new AutoQAMailPage(handler);
+        login();
     }
 
     @Description("Login")

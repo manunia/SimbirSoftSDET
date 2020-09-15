@@ -18,16 +18,14 @@ public class SeleniumHandler {
 
     private WebDriver driver;
 
-    public boolean start(boolean headlessMode, boolean needRemote) {
+    public SeleniumHandler(boolean headlessMode, boolean needRemote) {
         try {
             driver = needRemote ? getRemoteDriver(headlessMode) : getChromeDriver(headlessMode);
             //настройка неявных ожиданий
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }catch (Exception e) {
             System.out.println("Error: driver was not initialized " + e.getMessage());
-            return false;
         }
-        return true;
     }
 
     public boolean openPage(String url) {
