@@ -23,7 +23,7 @@ public class SeleniumHandler {
             driver = needRemote ? getRemoteDriver(headlessMode) : getChromeDriver(headlessMode);
             //настройка неявных ожиданий
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: driver was not initialized " + e.getMessage());
         }
     }
@@ -32,7 +32,7 @@ public class SeleniumHandler {
         try {
             driver.get(url);
         } catch (Exception e) {
-            System.out.println("Error opening page: "+ url);
+            System.out.println("Error opening page: " + url);
             return false;
         }
         return true;
@@ -63,7 +63,7 @@ public class SeleniumHandler {
 
     public String getChildElementText(String xpath, String parentElement) {
         try {
-            return getChildElement(xpath,parentElement).getText();
+            return getChildElement(xpath, parentElement).getText();
         } catch (Exception e) {
             System.out.println("Child element not located : " + e.getMessage());
             return "";

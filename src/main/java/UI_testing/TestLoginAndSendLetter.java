@@ -32,7 +32,7 @@ public class TestLoginAndSendLetter {
         qaMailPage = new AutoQAMailPage(handler);
         login();
     }
-    
+
     private void login() {
         qaLogin.loginToAutoQA(configFile.getPropertyValue("test_gmail"),configFile.getPropertyValue("test_password"));
     }
