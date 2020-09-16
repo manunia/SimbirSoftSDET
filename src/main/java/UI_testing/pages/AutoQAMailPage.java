@@ -15,6 +15,7 @@ import java.util.List;
 public class AutoQAMailPage extends AbstractPage{
 
     private static final String INCOMING_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA zE']";
+    private static final String READ_LETTERS = "//table[@class = 'F cf zt']/tbody/tr[@class = 'zA yO']";
 
     private static final String NEW_LETTER = "//*[@class='aic']/div/div";
 
@@ -32,6 +33,7 @@ public class AutoQAMailPage extends AbstractPage{
     @Step("Count incoming letters from my self")
     public String getResultFromIncomingLetters() {
         List<WebElement> elements = handler.getElements(INCOMING_LETTERS);
+        elements.addAll(handler.getElements(READ_LETTERS));
         Mail resultEmail = new Mail();
         resultEmail.setCountLetters(DataUseCaseClass.getElementIncomingLetters(elements));
         return resultEmail.toString();
