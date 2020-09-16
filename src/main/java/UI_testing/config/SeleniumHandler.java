@@ -71,7 +71,7 @@ public class SeleniumHandler {
     }
 
     public void click(WebElement webElement) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);arguments[0].click()", webElement);
+        ScriptExecutor.executeJS(driver,ScriptExecutor.CLICK_SCRIPT,webElement);
     }
 
     public void setTextToElement(String xpath, String text) {
