@@ -6,7 +6,7 @@
     <test name="User Tests">
         <classes>
             <class name="UI_testing.TestLoginAndSendLetter" />
-
+            <class name="API_testing.RestAssuredTestArticle"></class>
         </classes>
     </test>
 </suite>
