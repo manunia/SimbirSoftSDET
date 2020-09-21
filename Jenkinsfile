@@ -1,9 +1,24 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven'
+        allure 'allure'
+    }
     stages {
-        stage('Build') {
+        stage('clone repository') {
             steps {
-                echo 'This is a minimal pipeline.'
+                deleteDir()
+                git branch: 'master', credentialsId: 'gitlab_new', url: 'https://github.com/manunia/SimbirSoftSDET.git'
+            }
+        }
+        stage('run tests') {
+            steps {
+                sh "mvn clean test"
+        }
+        }
+        stage('generate allure report') {
+            steps {
+                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
             }
         }
     }
