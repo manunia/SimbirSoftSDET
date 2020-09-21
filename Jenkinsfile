@@ -8,7 +8,7 @@ pipeline {
         stage('clone repository') {
             steps {
                 deleteDir()
-                git branch: 'master', credentialsId: 'gitlab_new', url: 'https://github.com/manunia/SimbirSoftSDET.git'
+                git branch: 'master', url: 'https://github.com/manunia/SimbirSoftSDET.git'
             }
         }
         stage('run tests') {
