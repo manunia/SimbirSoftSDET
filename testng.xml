@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Test Suite" verbose="2" parallel="tests">
+<suite name="Test Suite" verbose="2">
 
     <parameter name="appURL" value="https://www.gmail.com/" />
-    <test name="User Tests">
+    <test name="all-tests">
+        <classes>
+            <class name="UI_testing.TestLoginAndSendLetter"/>
+            <class name="API_testing.RestAssuredTestArticle"/>
+        </classes>
+    </test>
+    <test name="run-ui-test">
         <classes>
             <class name="UI_testing.TestLoginAndSendLetter" />
         </classes>
     </test>
-    <test name="API Tests">
+    <test name="run-api-test">
         <classes>
             <class name="API_testing.RestAssuredTestArticle" />
         </classes>

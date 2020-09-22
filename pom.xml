@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <aspectj.version>1.9.2</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selectedTests>all-tests</selectedTests>
     </properties>
 
     <build>
@@ -34,6 +35,12 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <properties>
+                        <property>
+                            <name>testnames</name>
+                            <value>${selectedTests}</value>
+                        </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
