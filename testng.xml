@@ -2,11 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Test Suite" verbose="2">
 
-    <parameter name="appURL" value="https://www.gmail.com/" />
+<!--    <parameter name="appURL" value="https://www.gmail.com/" />-->
     <test name="all-tests">
         <classes>
             <class name="UI_testing.TestLoginAndSendLetter"/>
             <class name="API_testing.RestAssuredTestArticle"/>
+            <class name="mobile_test.MobileJoomTest"/>
         </classes>
     </test>
     <test name="run-ui-test">
@@ -17,6 +18,11 @@
     <test name="run-api-test">
         <classes>
             <class name="API_testing.RestAssuredTestArticle" />
+        </classes>
+    </test>
+    <test name="run-mobile-test">
+        <classes>
+            <class name="mobile_test.MobileJoomTest"/>
         </classes>
     </test>
 
